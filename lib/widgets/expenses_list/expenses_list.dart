@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:chapter5_expense_tracker/models/expense.dart';
+import 'package:chapter5_expense_tracker/widgets/expenses_list/expense_item.dart';
 
 class ExpensesList extends StatelessWidget {
   final List<Expense> expenses;
@@ -18,7 +19,7 @@ class ExpensesList extends StatelessWidget {
     // itemCount要傳最多有多少個
     return ListView.builder(
       itemCount: expenses.length,
-      itemBuilder: (ctx, idx) => Text(expenses[idx].title),
+      itemBuilder: (ctx, idx) => ExpenseItem(expenses[idx]),
     );
   }
 }
