@@ -29,6 +29,20 @@ class _ExpenseState extends State<Expenses> {
     ),
   ];
 
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpense.add(expense);
+    });
+    return;
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpense.remove(expense);
+    });
+    return;
+  }
+
   /// used when press + sign on top of appBar
   void _openAddExpenseOverlay() {
     /// 這個會顯示從下面彈出來的model
@@ -37,12 +51,26 @@ class _ExpenseState extends State<Expenses> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (BuildContext ctx) => const NewExpense(),
+      builder: (BuildContext ctx) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    const Widget noExpenseText = Center(
+      child: Text('No Expense! Start Add Some!'),
+    );
+
+    Widget displayWidget = _registeredExpense.isEmpty
+        ? noExpenseText
+        : Expanded(
+            child: ExpensesList(
+              expenses: _registeredExpense,
+              onRemoveFunction: _removeExpense,
+            ),
+          );
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -57,10 +85,9 @@ class _ExpenseState extends State<Expenses> {
         ],
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: ExpensesList(expenses: _registeredExpense),
-          ),
+          displayWidget,
         ],
       ),
     );
