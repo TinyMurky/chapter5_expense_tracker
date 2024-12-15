@@ -36,10 +36,35 @@ class _ExpenseState extends State<Expenses> {
     return;
   }
 
+  /// used in SnackBar Undo
+  void _insertExpense(int index, Expense expense) {
+    setState(() {
+       _registeredExpense.insert(index, expense);   
+    });
+    return;
+  }
+
   void _removeExpense(Expense expense) {
+    final int expenseIdx = _registeredExpense.indexOf(expense);
+  
+
     setState(() {
       _registeredExpense.remove(expense);
     });
+
+    // Find the ScaffoldMessenger in the widget tree
+    // and use it to show a SnackBar.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text("Expense deleted!"),
+        action: SnackBarAction(
+          
+          label: "Undo",
+          onPressed: () => _insertExpense(expenseIdx, expense),
+        ),
+      ),
+    );
+
     return;
   }
 

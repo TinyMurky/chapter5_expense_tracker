@@ -17,7 +17,7 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // list view 可以在快要渲染石材build widget, 就不會造成效能的浪費
+    // list view 可以在快要渲染時才build widget, 就不會造成效能的浪費
     // idem builder 要回傳function, 吃 builderContext 和 index
     // 回傳widget
     // itemCount要傳最多有多少個
