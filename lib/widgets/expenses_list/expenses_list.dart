@@ -27,12 +27,22 @@ class ExpensesList extends StatelessWidget {
       // key 請看 https://ithelp.ithome.com.tw/articles/10295709
       itemBuilder: (ctx, idx) => Dismissible(
         key: ValueKey(expenses[idx]),
-        child: ExpenseItem(expenses[idx]),
+        dismissThresholds: const {
+          DismissDirection.horizontal: 0.1, 
+        },
+        background: Container(
+          color: Theme.of(context).colorScheme.error,
+          margin: EdgeInsets.symmetric(
+            vertical: (Theme.of(context).cardTheme.margin?.vertical  ?? 8) / 2,
+            //horizontal: Theme.of(context).cardTheme.margin?.horizontal ?? 16,
+          ),
+        ),
         onDismissed: (DismissDirection direction) {
           // direction 分成左邊或右邊，這邊先寫成不管哪邊都可以
           // 把widget從畫面上滑掉並不會從 expenses list中去除，記得一定要用function除
           onRemoveFunction(expenses[idx]);
         },
+        child: ExpenseItem(expenses[idx]),
       ),
     );
   }

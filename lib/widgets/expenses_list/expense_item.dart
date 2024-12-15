@@ -7,7 +7,7 @@ import 'package:chapter5_expense_tracker/models/expense.dart';
 /// Spacer: https://api.flutter.dev/flutter/widgets/Spacer-class.html
 class ExpenseItem extends StatelessWidget {
   final Expense expense;
-  ExpenseItem(this.expense, {super.key});
+  const ExpenseItem(this.expense, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,12 @@ class ExpenseItem extends StatelessWidget {
           vertical: 8,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expense.title),
+            Text(
+              expense.title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 4),
             Row(
               children: [

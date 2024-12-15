@@ -43,7 +43,12 @@ class ExpenseTrackerApp extends StatelessWidget {
         ),
 
         textTheme: const TextTheme().copyWith(
-          bodyLarge: const TextTheme().bodyLarge?.copyWith(fontSize: 12),
+          titleLarge: ThemeData().textTheme.titleLarge?.copyWith(
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            color: kColorScheme.onSecondaryContainer,
+          ),
+          bodyLarge: ThemeData().textTheme.bodyLarge?.copyWith(fontSize: 12),
           bodyMedium: ThemeData().textTheme.bodyMedium?.copyWith(fontSize: 10),
           bodySmall: ThemeData().textTheme.bodySmall?.copyWith(fontSize: 8),
           labelLarge: ThemeData().textTheme.labelLarge?.copyWith(fontSize: 12),
